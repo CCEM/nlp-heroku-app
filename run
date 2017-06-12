@@ -1,0 +1,5 @@
+#!/bin/bash
+set -e
+cd reddex
+python setup.py develop
+python runapp.py

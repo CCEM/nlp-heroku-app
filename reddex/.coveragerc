@@ -1,0 +1,3 @@
+[run]
+source = reddex
+omit = reddex/test*
