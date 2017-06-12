@@ -17,4 +17,4 @@ def my_view(request):
 def inbound_view(request):
     """."""
     if request.method == 'POST':
-        return request.POST
+        return dict(request.POST)
