@@ -1,5 +1,6 @@
 """."""
 from pyramid.view import view_config
+from reddex.scripts.sentiment_reddex import evaluate_comments
 
 
 @view_config(route_name='home', renderer='../templates/mytemplate.jinja2')
@@ -17,4 +18,8 @@ def my_view(request):
 def inbound_view(request):
     """."""
     if request.method == 'POST':
-        return dict(request.POST)
+        response = {}
+        comments_dict = dict(request.POST)
+        for item in comments_dict:
+            response[item] = evaluate_comments(comments_dict[item])
+        return response
