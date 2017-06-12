@@ -13,7 +13,7 @@ def my_view(request):
     return {}
 
 
-@view_config(route_name='inbound')
+@view_config(route_name='inbound', renderer='json')
 def inbound_view(request):
     """."""
     if request.method == 'POST':
