@@ -1,3 +1,3 @@
 punkt
 subjectivity
-vader
+vader_lexicon
