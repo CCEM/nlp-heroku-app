@@ -6,4 +6,4 @@ def includeme(config):
     config.add_static_view('static', 'reddex:static')
     config.add_route('home', '/')
     config.add_route('inbound', '/inbound')
-    config.add_route('about_us', '/about')
+    config.add_route('about', '/about')

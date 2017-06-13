@@ -5,7 +5,7 @@ from pyramid.response import Response
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
-def my_view(request):
+def home_view(request):
     """."""
     # try:
     #     query = request.dbsession.query(MyModel)
@@ -15,7 +15,7 @@ def my_view(request):
     return {}
 
 
-@view_config(route_name='about', renderer='../templates/about_us.jinja2')
+@view_config(route_name='about', renderer='../templates/about.jinja2')
 def about_view(request):
     """."""
     # try:
@@ -27,8 +27,9 @@ def about_view(request):
 
 
 @view_config(route_name='inbound', renderer='json')
-def inbound_view(request):
+def inbound_api(request):
     """."""
+    print('made it here')
     request.response = Response()
     request.response.headerlist = []
     request.response.headerlist.extend(
@@ -40,6 +41,19 @@ def inbound_view(request):
     if request.method == 'POST':
         response = {}
         comments_dict = dict(request.POST)
+        print('receieved comments', comments_dict)
+        # update_db(comments_dict)
+        print('back from update')
         for item in comments_dict:
             response[item] = evaluate_comments(comments_dict[item])
+        print('response composed')
+        print('sent')
         return response
+    else:
+        return 'get request'
+
+
+# def update_db(data):
+#     """"."""
+#     print('updating dB', data)
+#     return data

@@ -15,7 +15,8 @@ from ..models import (
     get_session_factory,
     get_tm_session,
     )
-from ..models import MyModel
+from ..models import SubReddit
+from datetime import datetime
 
 
 def usage(argv):
@@ -43,5 +44,12 @@ def main(argv=sys.argv):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
 
-        model = MyModel(name='one', value=1)
-        dbsession.add(model)
+        new_entry = SubReddit(
+            name='Test Entry',
+            mean=0.3114,
+            median=0.1345,
+            mode=-0.1342,
+            date=datetime.now(),
+            )
+
+        dbsession.add(new_entry)

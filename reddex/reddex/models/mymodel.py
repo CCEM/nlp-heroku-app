@@ -2,7 +2,9 @@ from sqlalchemy import (
     Column,
     Index,
     Text,
-    PickleType
+    Float,
+    DateTime,
+    Integer
 )
 
 from .meta import Base
@@ -10,8 +12,12 @@ from .meta import Base
 
 class SubReddit(Base):
     __tablename__ = 'SubReddit'
-    name = Column(Text, primary_key=True)
-    scores = Column(PickleType)
+    id = Column(Integer, primary_key=True)
+    name = Column(Text)
+    mean = Column(Float)
+    median = Column(Float)
+    mode = Column(Float)
+    date = Column(DateTime)
 
 
-Index('name', SubReddit.name, unique=True, mysql_length=255)
+Index('id', SubReddit.id, unique=True, mysql_length=255)
