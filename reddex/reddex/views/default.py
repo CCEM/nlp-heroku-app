@@ -1,6 +1,7 @@
 """."""
 from pyramid.view import view_config
 from reddex.scripts.sentiment_reddex import evaluate_comments
+from pyramid.response import Response
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
@@ -28,8 +29,16 @@ def about_view(request):
 @view_config(route_name='inbound', renderer='json')
 def inbound_view(request):
     """."""
+    request.response = Response()
+    request.response.headerlist = []
+    request.response.headerlist.extend(
+        (
+            ('Access-Control-Allow-Origin', '*'),
+            ('Content-Type', 'application/json')
+        )
+    )
     if request.method == 'POST':
-        response = {'headers': {'Access-Control-Allow-Origin': '*'}}
+        response = {}
         comments_dict = dict(request.POST)
         for item in comments_dict:
             response[item] = evaluate_comments(comments_dict[item])
