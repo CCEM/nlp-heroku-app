@@ -18,7 +18,7 @@ def my_view(request):
 def inbound_view(request):
     """."""
     if request.method == 'POST':
-        response = {}
+        response = {'headers': {'Access-Control-Allow-Origin': '*'}}
         comments_dict = dict(request.POST)
         for item in comments_dict:
             response[item] = evaluate_comments(comments_dict[item])
