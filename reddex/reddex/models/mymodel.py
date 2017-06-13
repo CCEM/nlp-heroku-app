@@ -1,18 +1,17 @@
 from sqlalchemy import (
     Column,
     Index,
-    Integer,
     Text,
+    PickleType
 )
 
 from .meta import Base
 
 
-class MyModel(Base):
-    __tablename__ = 'models'
-    id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
+class SubReddit(Base):
+    __tablename__ = 'SubReddit'
+    name = Column(Text, primary_key=True)
+    scores = Column(PickleType)
 
 
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+Index('name', SubReddit.name, unique=True, mysql_length=255)
