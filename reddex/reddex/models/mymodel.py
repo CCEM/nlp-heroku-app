@@ -1,18 +1,22 @@
 from sqlalchemy import (
     Column,
     Index,
-    Integer,
     Text,
+    Float,
+    DateTime,
+    Integer
 )
 
 from .meta import Base
 
 
-class MyModel(Base):
-    __tablename__ = 'models'
+class SubReddit(Base):
+    __tablename__ = 'SubReddit'
     id = Column(Integer, primary_key=True)
     name = Column(Text)
-    value = Column(Integer)
+    mean = Column(Float)
+    median = Column(Float)
+    date = Column(DateTime)
 
 
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+Index('id', SubReddit.id, unique=True, mysql_length=255)
