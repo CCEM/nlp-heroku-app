@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 cd reddex
-python setup.py develop
 initdb production.ini
+python setup.py develop
 python runapp.py
