@@ -3,7 +3,7 @@ from pyramid.view import view_config
 from reddex.scripts.sentiment_reddex import evaluate_comments
 from pyramid.response import Response
 from reddex.models import SubReddit
-# import threading
+import threading
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
@@ -45,16 +45,9 @@ def inbound_api(request):
         sub = comments_dict.pop('url', None)
         for item in comments_dict:
             response[item] = evaluate_comments(comments_dict[item])
-
-        new_entry = SubReddit(
-            name=sub,
-            mean=sum(response.values())/len(response),
-            median=sorted(list(response.values()))/(int(len(response)/2))
-        )
-        request.dbsession.add(new_entry)
-        # thread = threading.Thread(target=update_db, args=(request, response, sub))
-        # thread.daemon = True
-        # thread.start()
+        thread = threading.Thread(target=update_db, args=(request, response, sub))
+        thread.daemon = True
+        thread.start()
         return response
     else:
         return 'get request'
@@ -67,7 +60,12 @@ def testdb_view(request):
     return {'db': entries}
 
 
-# def update_db(request, data, sub):
-#     """"."""
-#
-#     return
+def update_db(request, data, sub):
+    """"."""
+    new_entry = SubReddit(
+        name=sub,
+        mean=sum(data.values())/len(data),
+        median=sorted(list(data.values()))[(int(len(data)/2))]
+    )
+    request.dbsession.add(new_entry)
+    return
