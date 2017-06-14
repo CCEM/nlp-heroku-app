@@ -45,10 +45,12 @@ def inbound_api(request):
         sub = comments_dict.pop('url', None)
         for item in comments_dict:
             response[item] = evaluate_comments(comments_dict[item])
-        # thread = threading.Thread(target=update_db, args=(request, response, sub))
-        # thread.daemon = True
-        # thread.start()
-        update_db(request, response, sub)
+        new_entry = SubReddit(
+            name=sub,
+            mean=sum(response.values())/len(response),
+            median=sorted(list(response.values()))/(int(len(response)/2))
+        )
+        request.dbsession.add(new_entry)
         return response
     else:
         return 'get request'
@@ -59,14 +61,3 @@ def testdb_view(request):
     """."""
     entries = request.dbsession.query(SubReddit).all()
     return {'db': entries}
-
-
-def update_db(request, data, sub):
-    """"."""
-    new_entry = SubReddit(
-        name=sub,
-        mean=sum(data.values())/len(data),
-        median=sorted(list(data.values()))/(int(len(data)/2))
-    )
-    request.dbsession.add(new_entry)
-    return
