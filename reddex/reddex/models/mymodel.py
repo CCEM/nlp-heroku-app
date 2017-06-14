@@ -16,7 +16,6 @@ class SubReddit(Base):
     name = Column(Text)
     mean = Column(Float)
     median = Column(Float)
-    mode = Column(Float)
     date = Column(DateTime)
 
 
