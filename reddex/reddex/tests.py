@@ -1,7 +1,9 @@
 """."""
 from pyramid import testing
 from reddex.views.default import inbound_api
+from pyramid.config import Configurator
 import pytest
+import os
 import transaction
 from datetime import datetime
 import webtest
@@ -84,7 +86,7 @@ def testapp(request):
 
     def main(global_config, **settings):
         """Return a Pyramid WSGI application."""
-        settings['sqlalchemy.url'] = 'postgres:///test_reddexdb'
+        settings['sqlalchemy.url'] = os.environ.get('TEST_DATABASE_URL')
         config = Configurator(settings=settings)
         config.include('pyramid_jinja2')
         config.include('reddex.models')
@@ -131,3 +133,8 @@ def test_inbound_handles_data(dummy_request):
 
 
 # ++++++++ Functional Tests +++++++++ #
+
+def test_home_view_returns_200(testapp):
+    """Test that the home view returns 200 OK response."""
+    response = testapp.get('/')
+    assert response.status_code == 200
