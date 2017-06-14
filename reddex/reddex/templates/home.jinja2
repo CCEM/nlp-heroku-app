@@ -1,14 +1,25 @@
 {% extends "layout.jinja2" %}
 {% block content %}
 <h1>Subreddits visited</h1>
+
+<h1>5 Most Positive</h1>
 <ul>
-  {{% for sub in subreddits%}}
-  <li>{{ subreddits[sub] }}</li>
-  {{% endfor %}}
+  {% for sub in positive %}
+  <li>{{ sub[0] }}: {{ sub[1] }}</li>
+  {% endfor %}
 </ul>
+
+<h1>5 Least Positive</h1>
 <ul>
-  {{% for sub in averages%}}
+  {% for sub in negative %}
+  <li>{{ sub[0] }}: {{ sub[1] }}</li>
+  {% endfor %}
+</ul>
+
+<ul>
+  {% for sub in averages%}
   <li>{{ sub }}: {{ averages[sub] }}</li>
-  {{% endfor %}}
+  {% endfor %}
 </ul>
+
 {% endblock content %}
