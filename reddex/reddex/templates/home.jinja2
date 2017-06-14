@@ -1,6 +1,6 @@
 {% extends "layout.jinja2" %}
 {% block content %}
-<h1>Subreddits visited</h1>
+<h1>Subreddits we've evaluated:</h1>
 
 <h1>5 Most Positive</h1>
 <ul>
@@ -16,9 +16,10 @@
   {% endfor %}
 </ul>
 
+<h1>5 Most Neutral</h1>
 <ul>
-  {% for sub in averages%}
-  <li>{{ sub }}: {{ averages[sub] }}</li>
+  {% for sub in neutral%}
+  <li>{{ sub[0] }}: {{ sub[1] }}</li>
   {% endfor %}
 </ul>
 

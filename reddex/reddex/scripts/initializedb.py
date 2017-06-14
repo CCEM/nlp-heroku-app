@@ -39,23 +39,23 @@ def main(argv=sys.argv):
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
-    session_factory = get_session_factory(engine)
+    # session_factory = get_session_factory(engine)
 
-    with transaction.manager:
-        import random
-        dbsession = get_tm_session(session_factory, transaction.manager)
-        test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
-                     'test6', 'test7', 'test8', 'test9', 'test10']
-        holder = []
-        for sub in test_subs:
-            for _ in range(5):
-                new_entry = SubReddit(
-                    name=sub,
-                    mean=random.uniform(-1, 1),
-                    median=random.uniform(-1, 1),
-                    date=datetime.now()
-                )
-                holder.append(new_entry)
-
-
-        dbsession.add_all(holder)
+    # with transaction.manager:
+    #     import random
+    #     dbsession = get_tm_session(session_factory, transaction.manager)
+    #     test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
+    #                  'test6', 'test7', 'test8', 'test9', 'test10']
+    #     holder = []
+    #     for sub in test_subs:
+    #         for _ in range(5):
+    #             new_entry = SubReddit(
+    #                 name=sub,
+    #                 mean=random.uniform(-1, 1),
+    #                 median=random.uniform(-1, 1),
+    #                 date=datetime.now()
+    #             )
+    #             holder.append(new_entry)
+    #
+    #
+    #     dbsession.add_all(holder)

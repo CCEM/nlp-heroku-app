@@ -20,14 +20,17 @@ def home_view(request):
         ).filter(SubReddit.name == sub).all()
         sub_medians = [median[0] for median in sub_medians]
         averages_dict[sub] = sum(sub_medians)/len(sub_medians)
-        sorted_tuple = sorted(averages_dict.items(), key=operator.itemgetter(1))[::-1]
-        positive_tuple = sorted_tuple[0:5]
-        negative_tuple = sorted_tuple[-5:][::-1]
+        sorted_list_of_tuples = sorted(averages_dict.items(), key=operator.itemgetter(1))[::-1]
+        positive5 = sorted_list_of_tuples[0:5]
+        negative5 = sorted_list_of_tuples[-5:][::-1]
+        neutral_start = int(len(sorted_list_of_tuples)/2)-2
+        neutral_end = int(len(sorted_list_of_tuples)/2)+3
+        neutral5 = sorted_list_of_tuples[neutral_start:neutral_end]
 
     return {
-        'averages': averages_dict,
-        'positive': positive_tuple,
-        'negative': negative_tuple
+        'neutral': neutral5,
+        'positive': positive5,
+        'negative': negative5
     }
 
 
