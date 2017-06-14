@@ -54,7 +54,7 @@ def inbound_api(request):
         return 'get request'
 
 
-@view_config(route_name='test_db', renderer='../templates/testdb.jinja2')
+@view_config(route_name='testdb', renderer='../templates/testdb.jinja2')
 def testdb_view(request):
     """."""
     entries = request.dbsession.query(SubReddit).all()
