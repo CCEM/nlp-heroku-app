@@ -48,7 +48,6 @@ def main(argv=sys.argv):
             name='Test Entry',
             mean=0.3114,
             median=0.1345,
-            mode=-0.1342,
             date=datetime.now(),
             )
 
