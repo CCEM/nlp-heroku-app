@@ -2,6 +2,7 @@
 from pyramid.view import view_config
 from reddex.scripts.sentiment_reddex import evaluate_comments
 from pyramid.response import Response
+from reddex.models import SubReddit
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
@@ -51,6 +52,13 @@ def inbound_api(request):
         return response
     else:
         return 'get request'
+
+
+@view_config(route_name='testdb', renderer='../templates/testdb.jinja2')
+def testdb_view(request):
+    """."""
+    entries = request.dbsession.query(SubReddit).all()
+    return {'db': entries}
 
 
 # def update_db(data):

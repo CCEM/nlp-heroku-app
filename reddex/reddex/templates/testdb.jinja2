@@ -1,0 +1,13 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div class="content">
+  <h1><span class="font-semi-bold">Test</span> <span class="smaller">Test</span></h1>
+  <p>Not welcome</p>
+  <ul>
+    {% for item in db %}
+      <li>{{ item.name }} {{ item.mode }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock content %}
