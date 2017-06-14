@@ -9,12 +9,18 @@ from datetime import datetime
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def home_view(request):
     """."""
-    # try:
-    #     query = request.dbsession.query(MyModel)
-    #     one = query.filter(MyModel.name == 'one').first()
-    # except DBAPIError:
-    #     return Response(db_err_msg, content_type='text/plain', status=500)
-    return {}
+    session = request.dbsession
+    distinct_subs = session.query(SubReddit.name).distinct()
+    averages_dict = {}
+    for sub in distinct_subs:
+        sub_medians = session.query(
+            SubReddit.median
+        ).filter(SubReddit.name == sub).all()
+        averages_dict[sub] = sum(sub_medians)/len(sub_medians)
+    return {
+        'subreddits': distinct_subs,
+        'averages': averages_dict
+    }
 
 
 @view_config(route_name='about', renderer='../templates/about.jinja2')
