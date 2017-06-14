@@ -4,17 +4,34 @@ from reddex.scripts.sentiment_reddex import evaluate_comments
 from pyramid.response import Response
 from reddex.models import SubReddit
 from datetime import datetime
+import operator
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def home_view(request):
     """."""
-    # try:
-    #     query = request.dbsession.query(MyModel)
-    #     one = query.filter(MyModel.name == 'one').first()
-    # except DBAPIError:
-    #     return Response(db_err_msg, content_type='text/plain', status=500)
-    return {}
+    session = request.dbsession
+    distinct_subs = session.query(SubReddit.name).distinct()
+    distinct_subs = [sub[0] for sub in distinct_subs]
+    averages_dict = {}
+    for sub in distinct_subs:
+        sub_medians = session.query(
+            SubReddit.median
+        ).filter(SubReddit.name == sub).all()
+        sub_medians = [median[0] for median in sub_medians]
+        averages_dict[sub] = sum(sub_medians)/len(sub_medians)
+        sorted_list_of_tuples = sorted(averages_dict.items(), key=operator.itemgetter(1))[::-1]
+        positive5 = sorted_list_of_tuples[0:5]
+        negative5 = sorted_list_of_tuples[-5:][::-1]
+        neutral_start = int(len(sorted_list_of_tuples)/2)-2
+        neutral_end = int(len(sorted_list_of_tuples)/2)+3
+        neutral5 = sorted_list_of_tuples[neutral_start:neutral_end]
+
+    return {
+        'neutral': neutral5,
+        'positive': positive5,
+        'negative': negative5
+    }
 
 
 @view_config(route_name='about', renderer='../templates/about.jinja2')
