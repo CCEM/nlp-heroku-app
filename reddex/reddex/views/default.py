@@ -4,6 +4,7 @@ from reddex.scripts.sentiment_reddex import evaluate_comments
 from pyramid.response import Response
 from reddex.models import SubReddit
 # import threading
+from datetime import datetime
 
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
@@ -49,7 +50,8 @@ def inbound_api(request):
         new_entry = SubReddit(
             name=sub,
             mean=sum(response.values())/len(response),
-            # median=sorted(list(response.values()))[(int(len(response)/2))]
+            median=sorted(list(response.values()))[(int(len(response)/2))],
+            date=datetime.now()
         )
         request.dbsession.add(new_entry)
         # thread = threading.Thread(target=update_db, args=(request, response, sub))
