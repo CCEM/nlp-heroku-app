@@ -5,14 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="pyramid web application">
-    <meta name="author" content="Pylons Project">
-    <link rel="shortcut icon" href="{{request.static_url('reddex:static/placeholder.png')}}">
+    <meta name="author" content="Reddex">
 
     <title>Reddex Web Application</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="{{request.static_url('reddex:static/red16.png')}}">
-    <link rel="stylesheet" href="{{ request.static_path('reddex:static/foundation.css') }}">
-    <link href="{{request.static_url('reddex:static/layout.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" href="{{request.static_url('reddex:static/images/red16.png')}}">
+    <link rel="stylesheet" href="{{ request.static_path('reddex:static/styles/foundation.css') }}">
+    <link href="{{request.static_url('reddex:static/styles/layout.css')}}" rel="stylesheet">
   </head>
 
   <body>
@@ -38,14 +37,6 @@
     {% block content %}
     {% endblock content %}
     <Footer>
-      <div class="wrap medium-up-1">
-        <div class="column">
-          <h5> Legal</h5>
-          <hr>
-          <p>
-          </p>
-        </div>
-      </div>
     </Footer>
   </body>
 </html>
