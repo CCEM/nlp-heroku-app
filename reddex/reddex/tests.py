@@ -33,7 +33,6 @@ def db_session(configuration, request):
     SessionFactory = configuration.registry["dbsession_factory"]
     session = SessionFactory()
     engine = session.bind
-    # Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
     def teardown():
@@ -45,12 +44,12 @@ def db_session(configuration, request):
 
 
 @pytest.fixture
-def add_models(testapp):
+def fill_db(testapp):
     """Fill database."""
+    import random
     SessionFactory = testapp.app.registry["dbsession_factory"]
     with transaction.manager:
         dbsession = get_tm_session(SessionFactory, transaction.manager)
-        import random
         test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
                      'test6', 'test7', 'test8', 'test9', 'test10']
         holder = []
@@ -73,7 +72,7 @@ def add_models(testapp):
 def configuration(request):
     """Set up a Configurator instance."""
     config = testing.setUp(settings={
-        'sqlalchemy.url': 'postgres:///test_reddexdb'
+        'sqlalchemy.url': os.environ.get('TEST_DATABASE_URL')
     })
     config.include('reddex.models')
     config.include('reddex.routes')
@@ -117,7 +116,7 @@ def testapp(request):
 
 # ++++++++ Unit Tests +++++++++ #
 
-def test_database_fills(add_models, db_session):
+def test_database_fills(fill_db, db_session):
     """Check database is filled."""
     assert len(db_session.query(SubReddit).all()) == 50
 
@@ -140,7 +139,7 @@ def test_inbound_handles_data(dummy_request):
 
 # ++++++++ Functional Tests +++++++++ #
 
-def test_home_view_returns_200(testapp):
+def test_home_view_returns_200(testapp, db_session, fill_db):
     """Test that the home view returns 200 OK response."""
     response = testapp.get('/')
     assert response.status_code == 200
