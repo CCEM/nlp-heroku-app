@@ -1,0 +1,53 @@
+{% extends "layout.jinja2" %}
+{% block content %}
+<h1>Subreddits we've evaluated:</h1>
+
+<h1>5 Most Positive</h1>
+<table>
+  <thead>
+    <td>Subreddit</td>
+    <td>Views</td>
+    <td>Average Score</td>
+  </thead>
+  {% for sub in positive %}
+  <tr>
+    <td>{{ sub[0] }}:</td>
+    <td>{{ views[sub[0]] }}</td>
+    <td>{{ sub[1] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h1>5 Least Positive</h1>
+<table>
+  <thead>
+    <td>Subreddit</td>
+    <td>Views</td>
+    <td>Average Score</td>
+  </thead>
+  {% for sub in negative %}
+  <tr>
+    <td>{{ sub[0] }}:</td>
+    <td>{{ views[sub[0]] }}</td>
+    <td>{{ sub[1] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+<h1>5 Most Neutral</h1>
+<table>
+  <thead>
+    <td>Subreddit</td>
+    <td>Views</td>
+    <td>Average Score</td>
+  </thead>
+  {% for sub in neutral %}
+  <tr>
+    <td>{{ sub[0] }}:</td>
+    <td>{{ views[sub[0]] }}</td>
+    <td>{{ sub[1] }}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% endblock content %}
