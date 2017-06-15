@@ -1,7 +1,6 @@
 coverage==4.4.1
 decorator==4.0.11
 hupper==1.0
-jedi==0.10.2
 Jinja2==2.9.6
 Mako==1.0.6
 MarkupSafe==1.0
@@ -17,7 +16,6 @@ py==1.4.34
 Pygments==2.2.0
 pyramid==1.8.4
 pyramid-debugtoolbar==4.1
-pyramid-ipython==0.2
 pyramid-jinja2==2.7
 pyramid-mako==1.0.2
 pyramid-tm==2.1
