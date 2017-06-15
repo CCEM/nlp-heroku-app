@@ -20,20 +20,17 @@
       <div class="left">
         <ul class="dropdown menu">
           <li>
-            <div class="menu-text"><h4><a href="{{request.route_url('home')}}">Home</a></h4></div>
+            <div class="menu-text"><h5><a href="{{request.route_url('home')}}">Home</a></h4></div>
           </li>
           <li>
-            <div class="menu-text"><h4><a href="{{request.route_url('about')}}">About</a></h4></div>
+            <div class="menu-text"><h5><a href="{{request.route_url('about')}}">About</a></h4></div>
           </li>
         </ul>
       </div>
       <div class="right">
-        <i 
         <ul class="dropdown menu">
           <li>
-            <a href="https://github.com/">
-              <img src="{{ request.static_path('reddex:static/github.ico') }}" width="36" height="36"></img>
-            </a>
+            <a href="#" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i>GitHub</a>
           </li>
         </ul>
       </div>

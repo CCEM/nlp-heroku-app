@@ -9,8 +9,6 @@ GENERAL
 }
 
 
-
-
 /* ***************************************************************************
 NAV
 *************************************************************************** */
@@ -20,20 +18,28 @@ NAV
     position: fixed;
     top: 0;
     width: 100%;
+    height: 55px;
     z-index: 99;
+    min-width: 416px;
 }
 
 .left {
-    padding: 10px 20px;
+    float: left;
+    padding: 5px 20px;
 }
 
 .right {
-    position: fixed;
-    top: 0;
-    right: 0;
+    float: right;
 }
 
-.nav-bar h4 {
+.menu > li > a img, .menu > li > a i,
+.menu > li > a svg {
+    padding: 5px 20px;
+    font-size: 2em;
+}
+
+
+.nav-bar h5 {
     font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
 }
 
@@ -43,6 +49,7 @@ NAV
 
 .menu li a {
     color: #CECECE;
+    padding: 0.4rem 1rem;
     background-color: #333;
 }
 
@@ -61,8 +68,9 @@ HERO
 *************************************************************************** */
 .hero {
     color: #CECECE;
-    background-color: #333;
+    background-color: #cce6ff;
     padding: 10px 80px;
+    min-height: 200px;
 }
 
 .wrap {
@@ -73,6 +81,11 @@ HERO
     font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
 }
 
+.column img {
+    min-width: 110px;
+    min-height: 110px;
+    max-height: 150px;
+}
 
 
 /* ***************************************************************************
