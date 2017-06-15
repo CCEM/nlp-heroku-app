@@ -1,0 +1,277 @@
+
+/* ***************************************************************************
+GENERAL
+*************************************************************************** */
+.wrap {
+    width: 90%;
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+
+
+
+/* ***************************************************************************
+NAV
+*************************************************************************** */
+.nav-bar {
+    color: #CECECE;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 99;
+}
+
+.left {
+    padding: 10px 20px;
+}
+
+.right {
+    position: fixed;
+    top: 0;
+    right: 0;
+}
+
+.nav-bar h4 {
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+.menu {
+    position: relative;
+}
+
+.menu li a {
+    color: #CECECE;
+    background-color: #333;
+}
+
+
+.menu li a:hover {
+    background-color: rgba(255,255,255, 0.1);
+}
+
+.menu-text a {
+    color: white;
+}
+
+
+/* ***************************************************************************
+HERO
+*************************************************************************** */
+.hero {
+    color: #CECECE;
+    background-color: #333;
+    padding: 10px 80px;
+}
+
+.wrap {
+    padding-top: 65px;
+}
+
+.columns h2 {
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+
+
+/* ***************************************************************************
+MAIN SECTION
+*************************************************************************** */
+.main {
+    margin-top: 0;
+}
+
+
+#background {
+    background-image: url(main_back.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+}
+
+.body {
+    background-color: #333;
+    opacity: 0.85;
+    background-blend-mode: overlay;
+    padding: 25px 25px 15px 25px;
+}
+
+.body h1 {
+    text-align: center;
+    color: white;
+}
+
+.body h3 {
+    text-align: center;
+    color: white;
+}
+
+.button {
+    float:right;
+    height: 40px;
+    width: 140px;
+    padding: 8px;
+}
+
+.button a {
+    color: white;
+    font-size: 22px;
+}
+
+.Confirm {
+    float: left;
+}
+
+.edit {
+    width: 100px;
+}
+
+.pagination {
+    color: white;
+    display: inline;
+}
+
+.pagination li {
+    padding: 0 3px;
+}
+
+.pagination li a {
+    color: white;
+}
+
+.pagination li a:hover {
+    color: black;
+}
+
+.active {
+    color: #87FFFF;
+}
+
+.entries {
+    color: white;
+    padding: 0px 25px;
+    min-height: 1530px;
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+.entries a {
+    max-width: 600px;
+    color: white;
+}
+
+.entries h3 {
+    text-align: left;
+    max-width: 600px;
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+.titlearea textarea {
+    width: 100%;
+    height: 35px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+    color: black;
+
+}
+
+
+.infoarea {
+    color: black;
+}
+
+
+.infoarea textarea {
+    width: 100%;
+    height: 35px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+
+.bodyarea textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.columns h2 {
+    color: white;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+}
+
+
+/* ***************************************************************************
+FOOTER
+*************************************************************************** */
+
+footer {
+    color: #CECECE;
+    height: 140px;
+    width: 100%;
+    background-color: #333;
+    padding-bottom: 50px;
+}
+
+footer a {
+    display: block;
+    margin-bottom: 3px;
+}
+
+footer h5 {
+    margin-top: -40px;
+}
+
+
+footer hr {
+    margin-bottom: 10px;
+}
+
+footer .column {
+    margin-top: -10px;
+}
+
+.column {
+    text-align: center;
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+
+.column a {
+    text-align: center;
+    padding-top: 7px;
+}
+
+.column h5 {
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}
+
+/* ***************************************************************************
+MEDIA QUERY
+*************************************************************************** */
+
+@media (min-width: 639px) {
+
+    .nav-desktop {
+        display: none;
+    }
+}
