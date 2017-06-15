@@ -1,17 +1,23 @@
 """."""
 from pyramid import testing
 from reddex.views.default import inbound_api
-import pytest
-import transaction
 from datetime import datetime
-import webtest
 from reddex.models.meta import Base
 from reddex.models import SubReddit
 from reddex.models import (
     get_engine,
     get_session_factory,
     get_tm_session,
-    )
+)
+from reddex.views.default import (
+    home_view,
+    about_view,
+    inbound_api
+)
+from pyramid.httpexceptions import HTTPNotFound
+import webtest
+import pytest
+import transaction
 
 
 SAMPLE_POST = {'reddex0': "I hate cake.", 'reddex1': "Dogs are cute."}
@@ -128,6 +134,43 @@ def test_inbound_handles_data(dummy_request):
     dummy_request.POST = SAMPLE_POST
     response = inbound_api(dummy_request)
     assert response == {'reddex0': -0.5719, 'reddex1': 0.4588}
+
+
+def test_home_route_returns_dict(dummy_request):
+    """."""
+    assert type(home_view(dummy_request)) == dict
+
+
+def test_about_route_returns_dict(dummy_request):
+    """."""
+    assert type(about_view(dummy_request)) == dict
+
+
+def test_inbound_returns_headers(dummy_request):
+    """."""
+    with pytest.raises(HTTPNotFound):
+        inbound_api(dummy_request)
+
+
+def test_inbound_bad_data(dummy_request):
+    """."""
+    dummy_request.method = 'POST'
+    dummy_request.POST = [1, 2, 3, 4, 5]
+    assert inbound_api(dummy_request) == 'Invalid input.'
+
+
+def test_add_to_db_increase_size(db_session):
+    """."""
+    db_len = len(db_session.query(SubReddit).all())
+    entry = SubReddit(
+        name='metroid',
+        mean=0.9,
+        median=0.85,
+        date=datetime.now()
+    )
+    db_session.add(entry)
+    assert (db_session.query(SubReddit).all())[-1].name == 'metroid'
+    assert len(db_session.query(SubReddit).all()) == db_len + 1
 
 
 # ++++++++ Functional Tests +++++++++ #
