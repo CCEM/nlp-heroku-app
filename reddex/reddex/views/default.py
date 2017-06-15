@@ -15,12 +15,14 @@ def home_view(request):
     distinct_subs = session.query(SubReddit.name).distinct()
     distinct_subs = [sub[0] for sub in distinct_subs]
     averages_dict = {}
+    views_dict = {}
     neutral5 = positive5 = negative5 = None
     for sub in distinct_subs:
         sub_medians = session.query(
             SubReddit.median
         ).filter(SubReddit.name == sub).all()
         sub_medians = [median[0] for median in sub_medians]
+        views_dict[sub] = len(sub_medians)
         averages_dict[sub] = sum(sub_medians) / len(sub_medians)
         sorted_list_of_tuples = sorted(averages_dict.items(), key=operator.itemgetter(1))[::-1]
         positive5 = sorted_list_of_tuples[0:5]
@@ -32,7 +34,8 @@ def home_view(request):
     return {
         'neutral': neutral5,
         'positive': positive5,
-        'negative': negative5
+        'negative': negative5,
+        'views': views_dict
     }
 
 
