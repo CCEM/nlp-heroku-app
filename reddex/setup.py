@@ -14,8 +14,6 @@ requires = [
     'pyramid_jinja2',
     'pyramid_debugtoolbar',
     'pyramid_tm',
-    'ipython',
-    'pyramid_ipython',
     'SQLAlchemy',
     'transaction',
     'zope.sqlalchemy',
