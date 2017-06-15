@@ -3505,16 +3505,16 @@ table {
   table thead,
   table tbody,
   table tfoot {
-    border: 1px solid #f1f1f1;
+    border: 1px solid rgba(204, 230, 255, 0.2);
     background-color: #fefefe; }
   table caption {
     padding: 0.5rem 0.625rem 0.625rem;
     font-weight: bold; }
   table thead {
-    background: #f8f8f8;
+    background: rgba(204, 230, 255, 0.5);
     color: #0a0a0a; }
   table tfoot {
-    background: #f1f1f1;
+    background: rgba(204, 230, 255, 0.2);
     color: #0a0a0a; }
   table thead tr,
   table tfoot tr {
@@ -3531,12 +3531,12 @@ table {
     padding: 0.5rem 0.625rem 0.625rem; }
   table tbody tr:nth-child(even) {
     border-bottom: 0;
-    background-color: #f1f1f1; }
+    background-color: rgba(204, 230, 255, 0.2); }
   table.unstriped tbody {
     background-color: #fefefe; }
     table.unstriped tbody tr {
       border-bottom: 0;
-      border-bottom: 1px solid #f1f1f1;
+      border-bottom: 1px solid rgba(204, 230, 255, 0.2);
       background-color: #fefefe; }
 
 @media screen and (max-width: 63.9375em) {
