@@ -181,6 +181,11 @@ def test_add_to_db_increase_size(db_session):
     assert len(db_session.query(SubReddit).all()) == db_len + 1
 
 
+def test_notfound_view_returns_dict(dummy_request):
+    """404 works."""
+    from reddex.views.notfound import notfound_view
+    assert notfound_view(dummy_request) == {}
+
 # ++++++++ Functional Tests +++++++++ #
 
 def test_home_view_returns_200(testapp, db_session, fill_db):
@@ -211,3 +216,9 @@ def test_access_control_header_added_to_request(testapp, db_session, fill_db):
     """Check for access control header."""
     response = testapp.post('/inbound', params=SAMPLE_POST)
     assert 'Access-Control-Allow-Origin' in response.headers
+
+
+def test_our_vader_integration():
+    """Returns  neg/pos test score from text."""
+    from reddex.scripts.sentiment_reddex import evaluate_comments
+    assert evaluate_comments("I love cats!") > 0
