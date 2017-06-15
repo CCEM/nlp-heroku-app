@@ -181,7 +181,26 @@ def test_add_to_db_increase_size(db_session):
     assert len(db_session.query(SubReddit).all()) == db_len + 1
 
 
+def test_notfound_view_returns_dict(dummy_request):
+    """404 works."""
+    from reddex.views.notfound import notfound_view
+    assert notfound_view(dummy_request) == {}
+
+
+def test_our_vader_integration():
+    """Returns  neg/pos test score from text."""
+    from reddex.scripts.sentiment_reddex import evaluate_comments
+    assert evaluate_comments("I love cats!") > 0
+
+
+def test_our_vader_integration_works_with_empty_string():
+    """Returns  neg/pos test score from text."""
+    from reddex.scripts.sentiment_reddex import evaluate_comments
+    assert evaluate_comments("") == 0
+
+
 # ++++++++ Functional Tests +++++++++ #
+
 
 def test_home_view_returns_200(testapp, db_session, fill_db):
     """Test that the home view returns 200 OK response."""

@@ -3,8 +3,9 @@ source = reddex
 omit =
     reddex/test*
     reddex/scripts/__init__.py
-    reddex/scripts/initalizedb.py
+    reddex/scripts/initializedb.py
     reddex/__init__.py
+    reddex/views/__init__.py
 
 [report]
 show_missing = True
