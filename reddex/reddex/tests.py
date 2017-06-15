@@ -1,25 +1,20 @@
-"""."""
+"""Testing for reddex."""
 from pyramid import testing
 from reddex.views.default import inbound_api
 from pyramid.config import Configurator
-import pytest
-import os
 from datetime import datetime
 from reddex.models.meta import Base
 from reddex.models import SubReddit
-from reddex.models import (
-    get_engine,
-    get_session_factory,
-    get_tm_session
-)
+from reddex.models import get_tm_session
 from reddex.views.default import (
     home_view,
     about_view,
-    inbound_api
 )
+from reddex.views.notfound import notfound_view
 from pyramid.httpexceptions import HTTPNotFound
-import webtest
+from reddex.scripts.sentiment_reddex import evaluate_comments
 import pytest
+import os
 import transaction
 
 
@@ -28,7 +23,7 @@ SAMPLE_POST = {'reddex0': "I hate cake.", 'reddex1': "Dogs are cute."}
 
 @pytest.fixture
 def dummy_request(db_session):
-    """."""
+    """Create dummy request with db_session."""
     dummy_request = testing.DummyRequest()
     dummy_request.dbsession = db_session
     return dummy_request
@@ -129,7 +124,7 @@ def test_database_fills(fill_db, db_session):
 
 
 def test_inbound_returns_dict(dummy_request):
-    """."""
+    """Inbound request returns dict."""
     dummy_request.method = 'POST'
     dummy_request.POST = SAMPLE_POST
     response = inbound_api(dummy_request)
@@ -137,7 +132,7 @@ def test_inbound_returns_dict(dummy_request):
 
 
 def test_inbound_handles_data(dummy_request):
-    """."""
+    """Inbound request returns accurate data."""
     dummy_request.method = 'POST'
     dummy_request.POST = SAMPLE_POST
     response = inbound_api(dummy_request)
@@ -145,30 +140,37 @@ def test_inbound_handles_data(dummy_request):
 
 
 def test_home_route_returns_dict(dummy_request):
-    """."""
+    """Home view request returns dict."""
     assert type(home_view(dummy_request)) == dict
 
 
 def test_about_route_returns_dict(dummy_request):
-    """."""
+    """About view request returns dict."""
     assert type(about_view(dummy_request)) == dict
 
 
-def test_inbound_returns_headers(dummy_request):
-    """."""
+def test_bad_inbound_returns_404(dummy_request):
+    """Non POST method returns not found object."""
     with pytest.raises(HTTPNotFound):
         inbound_api(dummy_request)
 
 
+def test_bad_about_returns_404(dummy_request):
+    """Non GET method returns not found object."""
+    dummy_request.method = 'POST'
+    with pytest.raises(HTTPNotFound):
+        about_view(dummy_request)
+
+
 def test_inbound_bad_data(dummy_request):
-    """."""
+    """Inbound POST with bad data returns message."""
     dummy_request.method = 'POST'
     dummy_request.POST = [1, 2, 3, 4, 5]
     assert inbound_api(dummy_request) == 'Invalid input.'
 
 
 def test_add_to_db_increase_size(db_session):
-    """."""
+    """Adding one record increases size of db and goes to end."""
     db_len = len(db_session.query(SubReddit).all())
     entry = SubReddit(
         name='metroid',
@@ -183,19 +185,16 @@ def test_add_to_db_increase_size(db_session):
 
 def test_notfound_view_returns_dict(dummy_request):
     """404 works."""
-    from reddex.views.notfound import notfound_view
     assert notfound_view(dummy_request) == {}
 
 
 def test_our_vader_integration():
-    """Returns  neg/pos test score from text."""
-    from reddex.scripts.sentiment_reddex import evaluate_comments
+    """Return  neg/pos test score from text."""
     assert evaluate_comments("I love cats!") > 0
 
 
 def test_our_vader_integration_works_with_empty_string():
-    """Returns  neg/pos test score from text."""
-    from reddex.scripts.sentiment_reddex import evaluate_comments
+    """Return neg/pos test score from text."""
     assert evaluate_comments("") == 0
 
 

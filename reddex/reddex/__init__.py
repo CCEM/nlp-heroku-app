@@ -1,4 +1,4 @@
-"""."""
+"""Pyramid magic."""
 from pyramid.config import Configurator
 import os
 
