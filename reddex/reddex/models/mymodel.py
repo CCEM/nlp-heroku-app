@@ -1,3 +1,4 @@
+"""Define subreddit model."""
 from sqlalchemy import (
     Column,
     Index,
@@ -11,6 +12,8 @@ from .meta import Base
 
 
 class SubReddit(Base):
+    """Define subreddit model."""
+
     __tablename__ = 'SubReddit'
     id = Column(Integer, primary_key=True)
     name = Column(Text)
