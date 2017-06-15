@@ -4,6 +4,7 @@ from reddex.scripts.sentiment_reddex import evaluate_comments
 from pyramid.response import Response
 from reddex.models import SubReddit
 from datetime import datetime
+from pyramid.httpexceptions import HTTPNotFound
 import operator
 
 
@@ -19,12 +20,12 @@ def home_view(request):
             SubReddit.median
         ).filter(SubReddit.name == sub).all()
         sub_medians = [median[0] for median in sub_medians]
-        averages_dict[sub] = sum(sub_medians)/len(sub_medians)
+        averages_dict[sub] = sum(sub_medians) / len(sub_medians)
         sorted_list_of_tuples = sorted(averages_dict.items(), key=operator.itemgetter(1))[::-1]
         positive5 = sorted_list_of_tuples[0:5]
         negative5 = sorted_list_of_tuples[-5:][::-1]
-        neutral_start = int(len(sorted_list_of_tuples)/2)-2
-        neutral_end = int(len(sorted_list_of_tuples)/2)+3
+        neutral_start = int(len(sorted_list_of_tuples) / 2) - 2
+        neutral_end = int(len(sorted_list_of_tuples) / 2) + 3
         neutral5 = sorted_list_of_tuples[neutral_start:neutral_end]
 
     return {
@@ -57,27 +58,30 @@ def inbound_api(request):
         )
     )
     if request.method == 'POST':
-        response = {}
-        comments_dict = dict(request.POST)
-        sub = comments_dict.pop('url', None)
-        for item in comments_dict:
-            response[item] = evaluate_comments(comments_dict[item])
+        try:
+            response = {}
+            comments_dict = dict(request.POST)
+            sub = comments_dict.pop('url', None)
+            for item in comments_dict:
+                response[item] = evaluate_comments(comments_dict[item])
 
-        new_entry = SubReddit(
-            name=sub,
-            mean=sum(response.values())/len(response),
-            median=sorted(list(response.values()))[(int(len(response)/2))],
-            date=datetime.now()
-        )
+            new_entry = SubReddit(
+                name=sub,
+                mean=sum(response.values()) / len(response),
+                median=sorted(list(response.values()))[(int(len(response) / 2))],
+                date=datetime.now()
+            )
 
-        request.dbsession.add(new_entry)
-        return response
+            request.dbsession.add(new_entry)
+            return response
+        except TypeError:
+            return 'Invalid input.'
     else:
-        return 'get request'
+        raise HTTPNotFound
 
 
 @view_config(route_name='testdb', renderer='../templates/testdb.jinja2')
-def testdb_view(request):
+def db_view_test(request):
     """."""
     entries = request.dbsession.query(SubReddit).all()
     return {'db': entries}
