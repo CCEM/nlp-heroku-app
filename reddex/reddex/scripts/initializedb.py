@@ -1,22 +1,20 @@
-import os
-import sys
-import transaction
 
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
-    )
-
+)
 from pyramid.scripts.common import parse_vars
-
 from ..models.meta import Base
 from ..models import (
     get_engine,
     get_session_factory,
     get_tm_session,
-    )
+)
 from ..models import SubReddit
 from datetime import datetime
+import os
+import sys
+import transaction
 
 
 def usage(argv):
@@ -39,23 +37,22 @@ def main(argv=sys.argv):
     Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
-    # session_factory = get_session_factory(engine)
+    session_factory = get_session_factory(engine)
 
-    # with transaction.manager:
-    #     import random
-    #     dbsession = get_tm_session(session_factory, transaction.manager)
-    #     test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
-    #                  'test6', 'test7', 'test8', 'test9', 'test10']
-    #     holder = []
-    #     for sub in test_subs:
-    #         for _ in range(5):
-    #             new_entry = SubReddit(
-    #                 name=sub,
-    #                 mean=random.uniform(-1, 1),
-    #                 median=random.uniform(-1, 1),
-    #                 date=datetime.now()
-    #             )
-    #             holder.append(new_entry)
-    #
-    #
-    #     dbsession.add_all(holder)
+    with transaction.manager:
+        import random
+        dbsession = get_tm_session(session_factory, transaction.manager)
+        test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
+                     'test6', 'test7', 'test8', 'test9', 'test10']
+        holder = []
+        for sub in test_subs:
+            for _ in range(5):
+                new_entry = SubReddit(
+                    name=sub,
+                    mean=random.uniform(-1, 1),
+                    median=random.uniform(-1, 1),
+                    date=datetime.now()
+                )
+                holder.append(new_entry)
+
+        dbsession.add_all(holder)
