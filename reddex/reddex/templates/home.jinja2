@@ -24,7 +24,7 @@
     <tr>
       <td>{{ sub[0] }}:</td>
       <td>{{ views[sub[0]] }}</td>
-      <td>{{ "{0:0.2f}".format(sub[1]) }}</td>
+      <td>{{ "{0:0.0f}".format(sub[1] * 100) }}%</td>
     </tr>
     {% endfor %}
   </table>
@@ -40,7 +40,7 @@
     <tr>
       <td>{{ sub[0] }}:</td>
       <td>{{ views[sub[0]] }}</td>
-      <td>{{ "{0:0.2f}".format(sub[1]) }}</td>
+      <td>{{ "{0:0.0f}".format(sub[1] * 100) }}%</td>
     </tr>
     {% endfor %}
   </table>
@@ -56,7 +56,7 @@
     <tr>
       <td>{{ sub[0] }}:</td>
       <td>{{ views[sub[0]] }}</td>
-      <td>{{ "{0:0.2f}".format(sub[1]) }}</td>
+      <td>{{ "{0:0.0f}".format(sub[1] * 100) }}%</td>
     </tr>
     {% endfor %}
   </table>
