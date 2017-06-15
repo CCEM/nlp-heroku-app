@@ -186,7 +186,21 @@ def test_notfound_view_returns_dict(dummy_request):
     from reddex.views.notfound import notfound_view
     assert notfound_view(dummy_request) == {}
 
+
+def test_our_vader_integration():
+    """Returns  neg/pos test score from text."""
+    from reddex.scripts.sentiment_reddex import evaluate_comments
+    assert evaluate_comments("I love cats!") > 0
+
+
+def test_our_vader_integration_works_with_empty_string():
+    """Returns  neg/pos test score from text."""
+    from reddex.scripts.sentiment_reddex import evaluate_comments
+    assert evaluate_comments("") == 0
+
+
 # ++++++++ Functional Tests +++++++++ #
+
 
 def test_home_view_returns_200(testapp, db_session, fill_db):
     """Test that the home view returns 200 OK response."""
@@ -197,7 +211,7 @@ def test_home_view_returns_200(testapp, db_session, fill_db):
 def test_home_view_returns_some_html(testapp, db_session, fill_db):
     """Home view returns html."""
     response = testapp.get('/')
-    assert '5 Most Positive' in response.html.text
+    assert 'Five most positive subreddits visited by our users' in response.html.text
 
 
 def test_about_view_returns_200(testapp, db_session, fill_db):
@@ -209,16 +223,10 @@ def test_about_view_returns_200(testapp, db_session, fill_db):
 def test_about_view_returns_some_html(testapp, db_session, fill_db):
     """About view returns html."""
     response = testapp.get('/about')
-    assert 'About Us' in response.html.text
+    assert 'About the Reddex team' in response.html.text
 
 
 def test_access_control_header_added_to_request(testapp, db_session, fill_db):
     """Check for access control header."""
     response = testapp.post('/inbound', params=SAMPLE_POST)
     assert 'Access-Control-Allow-Origin' in response.headers
-
-
-def test_our_vader_integration():
-    """Returns  neg/pos test score from text."""
-    from reddex.scripts.sentiment_reddex import evaluate_comments
-    assert evaluate_comments("I love cats!") > 0

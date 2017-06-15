@@ -1,5 +1,6 @@
 language: python
 python:
+  - "2.7"
   - "3.6"
 
 services:
@@ -15,7 +16,8 @@ install:
   - pip install coveralls
 # command to run tests
 script:
-  - py.test reddex/reddex/tests.py --cov=reddex/reddex --cov-report term-missing
+  - cd reddex
+  - py.test reddex/tests.py --cov=reddex --cov-report term-missing
 
 after_success:
   - coveralls

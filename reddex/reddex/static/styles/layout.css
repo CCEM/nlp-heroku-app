@@ -1,0 +1,299 @@
+
+/* ***************************************************************************
+GENERAL
+*************************************************************************** */
+.wrap {
+    width: 90%;
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+.column {
+    text-align: center;
+}
+
+#main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+/* ***************************************************************************
+NAV
+*************************************************************************** */
+.nav-bar {
+    color: #CECECE;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 55px;
+    z-index: 99;
+    min-width: 416px;
+}
+
+.left {
+    float: left;
+    padding: 5px 20px;
+}
+
+.right {
+    float: right;
+}
+
+.menu > li > a img, .menu > li > a i,
+.menu > li > a svg {
+    padding: 5px 20px;
+    font-size: 2em;
+}
+
+
+/*.nav-bar h5 {
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}*/
+
+.menu {
+    position: relative;
+}
+
+.menu li a {
+    color: #CECECE;
+    padding: 0.4rem 1rem;
+    background-color: #333;
+}
+
+
+.menu li a:hover {
+    background-color: rgba(255,255,255, 0.1);
+}
+
+.menu-text a {
+    color: white;
+}
+
+
+/* ***************************************************************************
+HERO
+*************************************************************************** */
+.hero {
+    color: white;
+    background-color: #cce6ff;
+    padding: 10px 80px;
+    min-height: 400px;
+    padding-top: 65px;
+}
+
+.reddex h1 {
+    text-align: left;
+    padding-top: 0;
+}
+
+.wrap {
+    padding-top: 65px;
+}
+
+/*.columns h2 {
+    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
+}*/
+
+div.reddex img {
+    display: block;
+    max-width: 240px;
+    float: left;
+    padding-right: 30px;
+}
+
+div.reddex {
+    padding-top: 60px;
+}
+
+div.reddex p {
+  margin-top: 0;
+  color: #333;
+  font-size: 1.35em;
+}
+
+
+
+/* ***************************************************************************
+MAIN SECTION
+*************************************************************************** */
+.main {
+    margin-top: 0;
+}
+
+
+#background {
+    background-image: url(main_back.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    height: 100%;
+}
+
+.body {
+    background-color: #333;
+    opacity: 0.85;
+    background-blend-mode: overlay;
+    padding: 25px 25px 15px 25px;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-size: 2em;
+    padding: 40px 0 0 0;
+}
+
+h2 {
+    color: black;
+    font-size: 1.5em;
+}
+
+.body h3 {
+    text-align: center;
+    color: white;
+}
+
+.button {
+    float:right;
+    height: 40px;
+    width: 140px;
+    padding: 8px;
+}
+
+.button a {
+    color: white;
+    font-size: 22px;
+}
+
+.titlearea textarea {
+    width: 100%;
+    height: 35px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+    color: black;
+
+}
+
+
+.infoarea {
+    color: black;
+}
+
+
+.infoarea textarea {
+    width: 100%;
+    height: 35px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+
+.bodyarea textarea {
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    resize: none;
+}
+
+.columns h2 {
+    color: white;
+}
+
+video {
+    display: block;
+    margin: 0 auto;
+}
+
+table {
+    margin-bottom: 40px;
+}
+
+hr {
+    margin-bottom: 40px;
+}
+
+
+/* ***************************************************************************
+FOOTER
+*************************************************************************** */
+
+footer {
+    color: #CECECE;
+    height: 50px;
+    width: 100%;
+    background-color: #333;
+    padding-bottom: 50px;
+}
+
+footer a {
+    display: block;
+    margin-bottom: 3px;
+}
+
+footer h5 {
+    margin-top: -40px;
+}
+
+
+footer hr {
+    margin-bottom: 10px;
+}
+
+footer .column {
+    margin-top: -10px;
+}
+
+.column a {
+    text-align: center;
+    padding-top: 7px;
+}
+
+/* ***************************************************************************
+ABOUT
+*************************************************************************** */
+
+div#spacer {
+    height: 60px;
+}
+
+section.bio {
+    margin: 20px 0;
+    min-height: 250px;
+}
+
+div.bio-image {
+    width: 200px;
+    margin-right: 20px;
+    float: left;
+}
+
+div.bio-text {
+    width: 100%;
+}
+
+
+/* ***************************************************************************
+MEDIA QUERY
+*************************************************************************** */
+
+@media (min-width: 639px) {
+
+    .nav-desktop {
+        display: none;
+    }
+}
