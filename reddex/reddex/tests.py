@@ -211,3 +211,9 @@ def test_access_control_header_added_to_request(testapp, db_session, fill_db):
     """Check for access control header."""
     response = testapp.post('/inbound', params=SAMPLE_POST)
     assert 'Access-Control-Allow-Origin' in response.headers
+
+
+def test_our_vader_integration():
+    """Returns  neg/pos test score from text."""
+    from reddex.scripts.sentiment_reddex import evaluate_comments
+    assert evaluate_comments("I love cats!") > 0
