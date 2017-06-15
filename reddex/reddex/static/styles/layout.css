@@ -47,11 +47,6 @@ NAV
     font-size: 2em;
 }
 
-
-/*.nav-bar h5 {
-    font-family: Palatino,Palatino Linotype,Palatino LT STD,Book Antiqua,Georgia,serif;
-}*/
-
 .menu {
     position: relative;
 }
@@ -168,48 +163,6 @@ h2 {
     font-size: 22px;
 }
 
-.titlearea textarea {
-    width: 100%;
-    height: 35px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    resize: none;
-    color: black;
-
-}
-
-
-.infoarea {
-    color: black;
-}
-
-
-.infoarea textarea {
-    width: 100%;
-    height: 35px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    resize: none;
-}
-
-
-.bodyarea textarea {
-    width: 100%;
-    height: 150px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
-    background-color: #f8f8f8;
-    resize: none;
-}
-
 .columns h2 {
     color: white;
 }
@@ -225,6 +178,17 @@ table {
 
 hr {
     margin-bottom: 40px;
+}
+
+#PNF {
+    background-color: #cce6ff;
+    padding: 120px;
+    min-height: 100vh;
+    text-align: center;
+}
+
+#PNF img {
+    padding-bottom: 20px;
 }
 
 

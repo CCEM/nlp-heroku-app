@@ -1,4 +1,4 @@
-
+"""Setup the DB."""
 from pyramid.paster import (
     get_appsettings,
     setup_logging,
@@ -18,6 +18,7 @@ import transaction
 
 
 def usage(argv):
+    """Pyramid magic."""
     cmd = os.path.basename(argv[0])
     print('usage: %s <config_uri> [var=value]\n'
           '(example: "%s development.ini")' % (cmd, cmd))
@@ -25,6 +26,7 @@ def usage(argv):
 
 
 def main(argv=sys.argv):
+    """Setup database."""
     if len(argv) < 2:
         usage(argv)
     config_uri = argv[1]
