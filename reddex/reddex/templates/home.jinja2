@@ -2,19 +2,17 @@
 {% block content %}
 <!-- HERO SECTION -->
     <section class="hero">
-      <div class="wrap">
-        <div class="row">
-          <div class="medium-2 columns">
-            <div class="column">
-              <img src="{{ request.static_path('reddex:static/white5.png') }}">
-            </div>
+      <div class="reddex">
+            <img src="{{ request.static_path('reddex:static/white5.png') }}">
+            <p>
+              This project identifies and evaluates reddit comments for tone (positivity, negativity, and objectivity). We do this in two parts: a Chrome browser extension and a web application. Our extension will allow the user the option of evaluating each comment when they visit a reddit comment thread by clicking on the extension icon. The tone is represented by highlighting the background color with red for negative comments, green for positive, and grey for neutral. Particularly positive comments are a deeper green while the particularly negative comments are more red. By right clicking on the icon the user can find a link back to our web application, where they can see further information about the history of the pages that have been evaluated. Behind the scenes, our extension was built in HTML, CSS and JavaScript which passes the information to a Python server and database that parses the page text and returns information on the language tone. We are using an NLTK library called Vader for these evaluations. Our web app was built using the Pyramid framework.
+            </p>
           </div>
-        </div>
-      </div>
     </section>
 <h1>Subreddits we've evaluated:</h1>
+<hr>
 
-<h1>5 Most Positive</h1>
+<h2>5 Most Positive</h2>
 <table>
   <thead>
     <td>Subreddit</td>
@@ -30,7 +28,7 @@
   {% endfor %}
 </table>
 
-<h1>5 Least Positive</h1>
+<h2>5 Least Positive</h2>
 <table>
   <thead>
     <td>Subreddit</td>
@@ -46,7 +44,7 @@
   {% endfor %}
 </table>
 
-<h1>5 Most Neutral</h1>
+<h2>5 Most Neutral</h2>
 <table>
   <thead>
     <td>Subreddit</td>
