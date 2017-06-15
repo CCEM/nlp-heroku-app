@@ -211,7 +211,7 @@ def test_home_view_returns_200(testapp, db_session, fill_db):
 def test_home_view_returns_some_html(testapp, db_session, fill_db):
     """Home view returns html."""
     response = testapp.get('/')
-    assert '5 Most Positive' in response.html.text
+    assert 'Five most positive subreddits visited by our users' in response.html.text
 
 
 def test_about_view_returns_200(testapp, db_session, fill_db):
@@ -223,7 +223,7 @@ def test_about_view_returns_200(testapp, db_session, fill_db):
 def test_about_view_returns_some_html(testapp, db_session, fill_db):
     """About view returns html."""
     response = testapp.get('/about')
-    assert 'About Us' in response.html.text
+    assert 'About the Reddex team' in response.html.text
 
 
 def test_access_control_header_added_to_request(testapp, db_session, fill_db):
