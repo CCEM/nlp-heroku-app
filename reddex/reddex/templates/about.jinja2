@@ -2,7 +2,42 @@
 
 {% block content %}
 <div class="content">
-  <h1><span class="font-semi-bold">About Us</span> <span class="smaller">About Us</span></h1>
-  <p class="lead">Welcome to <span class="font-normal">Reddex</span>, a&nbsp;Pyramid application generated&nbsp;by<br><span class="font-normal">Cookiecutter</span>.</p>
+  <h1>About the Reddex team</h1>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/carlos.jpeg')}}" /></div>
+        <div>
+            <h2>Carlos Cadena</h2>
+            <p></p>
+            <p><a href="https://github.com/carloscadena" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/chris.jpeg')}}" /></div>
+        <div>
+            <h2>Chris Hudson</h2>
+            <p></p>
+            <p><a href="https://github.com/CaHudson94" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/morgan.png')}}" /></div>
+        <div>
+            <h2>Morgan Nomura</h2>
+            <p>Morgan is a Seattle native coding in Python and JavaScript. She has a background in user-centered design, experience in internal tools, e-learning and physical computing. She can sew a pair of jeans from scratch without looking at the instructions.</p>
+            <p><a href="https://github.com/morganelle" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/ely.jpeg')}}" /></div>
+        <div>
+            <h2>Ely Paysinger</h2>
+            <p>My name is Ely. I believe that, technology is rapidly changing the world in positive ways and will be what unites us as a people. With a background in the Air force doing electronics repair and more recently as a Nurse in the emergency department I'm always excited to use new skills to solve old or new problems.  That's why I'm taking the leap into software development. </p>
+            <p><a href="https://github.com/W-Ely" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section>
+        <h2>Our repos</h2>
+        <p><a href="https://github.com/CCEM/nlp-chrome-extension">Extension</a> | <a href="https://github.com/CCEM/nlp-heroku-app">Web application</a></p>
+    </section>
 </div>
 {% endblock content %}
