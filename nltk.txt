@@ -1,3 +1,2 @@
 punkt
-subjectivity
 vader_lexicon

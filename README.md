@@ -23,7 +23,7 @@ Install required packages including those for testing.
 
 Install required lexicons for NLTK.
 ```sh
-  - python -c "import nltk; nltk.download('vader_lexicon'); nltk.download('subjectivity'); nltk.download('punkt')"
+  - python -c "import nltk; nltk.download('vader_lexicon'); nltk.download('punkt')"
 ```
 #### Testing
 
