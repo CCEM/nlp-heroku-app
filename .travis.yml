@@ -1,0 +1,23 @@
+language: python
+python:
+  - "3.6"
+
+services:
+  - postgresql
+
+before_script:
+  - psql -c "create database test_reddexdb;" -U postgres
+
+# command to install dependencies
+install:
+  - pip install -e reddex/.[testing]
+  - pip install coveralls
+# command to run tests
+script:
+  - py.test reddex/reddex/tests.py --cov=reddex/reddex --cov-report term-missing
+
+after_success:
+  - coveralls
+
+notifications:
+  email: false
