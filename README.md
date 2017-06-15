@@ -1,4 +1,4 @@
-# nlp-heroku-app
+# nlp-heroku-app  [![Build Status](https://travis-ci.org/CCEM/nlp-heroku-app.svg?branch=master)](https://travis-ci.org/CCEM/nlp-heroku-app)
 
 - This project identifies and evaluates text content on a web page for tone (positivity, negativity, and objectivity). We do this in two parts: a Chrome browser extension and a web application.
 

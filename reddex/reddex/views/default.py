@@ -82,10 +82,3 @@ def inbound_api(request):
             return 'Invalid input.'
     else:
         raise HTTPNotFound
-
-
-@view_config(route_name='testdb', renderer='../templates/testdb.jinja2')
-def db_view_test(request):
-    """."""
-    entries = request.dbsession.query(SubReddit).all()
-    return {'db': entries}
