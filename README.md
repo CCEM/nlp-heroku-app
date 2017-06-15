@@ -1,4 +1,4 @@
-# Reddex [![Build Status](https://travis-ci.org/CCEM/nlp-heroku-app.svg?branch=master)](https://travis-ci.org/CCEM/nlp-heroku-app)
+# Reddex [![Build Status](https://travis-ci.org/CCEM/nlp-heroku-app.svg?branch=master)](https://travis-ci.org/CCEM/nlp-heroku-app) [![Coverage Status](https://coveralls.io/repos/github/CCEM/nlp-heroku-app/badge.svg?branch=master)](https://coveralls.io/github/CCEM/nlp-heroku-app?branch=master)
 A Chrome extension for evaluating the tone of Reddit comments.
 
 

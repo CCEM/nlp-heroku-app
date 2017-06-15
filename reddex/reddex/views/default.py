@@ -42,11 +42,6 @@ def home_view(request):
 @view_config(route_name='about', renderer='../templates/about.jinja2')
 def about_view(request):
     """."""
-    # try:
-    #     query = request.dbsession.query(MyModel)
-    #     one = query.filter(MyModel.name == 'one').first()
-    # except DBAPIError:
-    #     return Response(db_err_msg, content_type='text/plain', status=500)
     return {}
 
 
