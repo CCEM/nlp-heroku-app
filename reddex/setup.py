@@ -23,7 +23,7 @@ requires = [
 ]
 
 tests_require = [
-    'WebTest >= 1.3.1',  # py3 compat
+    'WebTest >= 1.3.1',
     'pytest',
     'pytest-cov',
     'tox',
@@ -42,8 +42,7 @@ setup(
     ],
     author='Carlos Cadena, Chris Hudson, Ely Paysinger, Morgan Numura',
     author_email='cs.cadena@gmail.com, c.ahudson84@yahoo.com, paysinger@gmail.com, morgan.nomura@gmail.com',
-    url='this will be a link to chrome store?',
-    keywords='web pyramid pylons',
+    url='https://github.com/CCEM',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,

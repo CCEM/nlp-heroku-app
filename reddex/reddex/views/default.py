@@ -10,7 +10,7 @@ import operator
 
 @view_config(route_name='home', renderer='../templates/home.jinja2')
 def home_view(request):
-    """."""
+    """Get data from DB and render on home view."""
     session = request.dbsession
     distinct_subs = session.query(SubReddit.name).distinct()
     distinct_subs = [sub[0] for sub in distinct_subs]
@@ -41,13 +41,15 @@ def home_view(request):
 
 @view_config(route_name='about', renderer='../templates/about.jinja2')
 def about_view(request):
-    """."""
+    """Render about view."""
+    if request.method != 'GET':
+        raise HTTPNotFound
     return {}
 
 
 @view_config(route_name='inbound', renderer='json')
 def inbound_api(request):
-    """."""
+    """Accept good POST request and send back data."""
     request.response = Response()
     request.response.headerlist = []
     request.response.headerlist.extend(
