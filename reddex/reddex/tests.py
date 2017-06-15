@@ -1,13 +1,16 @@
 """."""
 from pyramid import testing
 from reddex.views.default import inbound_api
+from pyramid.config import Configurator
+import pytest
+import os
 from datetime import datetime
 from reddex.models.meta import Base
 from reddex.models import SubReddit
 from reddex.models import (
     get_engine,
     get_session_factory,
-    get_tm_session,
+    get_tm_session
 )
 from reddex.views.default import (
     home_view,
@@ -31,19 +34,29 @@ def dummy_request(db_session):
     return dummy_request
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def db_session(configuration, request):
     """Create a session for interacting with the test database."""
     SessionFactory = configuration.registry["dbsession_factory"]
     session = SessionFactory()
     engine = session.bind
-    Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
-    session_factory = get_session_factory(engine)
+    def teardown():
+        session.transaction.rollback()
+        Base.metadata.drop_all(engine)
 
+    request.addfinalizer(teardown)
+    return session
+
+
+@pytest.fixture
+def fill_db(testapp):
+    """Fill database."""
+    import random
+    SessionFactory = testapp.app.registry["dbsession_factory"]
     with transaction.manager:
-        import random
+        dbsession = get_tm_session(SessionFactory, transaction.manager)
         test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
                      'test6', 'test7', 'test8', 'test9', 'test10']
         holder = []
@@ -57,21 +70,16 @@ def db_session(configuration, request):
                 )
                 holder.append(new_entry)
 
-        session.add_all(holder)
+        dbsession.add_all(holder)
 
-    def teardown():
-        session.transaction.rollback()
-        Base.metadata.drop_all(engine)
-
-    request.addfinalizer(teardown)
-    return session
+    return dbsession
 
 
 @pytest.fixture(scope="session")
 def configuration(request):
     """Set up a Configurator instance."""
     config = testing.setUp(settings={
-        'sqlalchemy.url': 'postgres:///test_reddexdb'
+        'sqlalchemy.url': os.environ.get('TEST_DATABASE_URL')
     })
     config.include('reddex.models')
     config.include('reddex.routes')
@@ -90,7 +98,7 @@ def testapp(request):
 
     def main(global_config, **settings):
         """Return a Pyramid WSGI application."""
-        settings['sqlalchemy.url'] = 'postgres:///test_reddexdb'
+        settings['sqlalchemy.url'] = os.environ.get('TEST_DATABASE_URL')
         config = Configurator(settings=settings)
         config.include('pyramid_jinja2')
         config.include('reddex.models')
@@ -115,7 +123,7 @@ def testapp(request):
 
 # ++++++++ Unit Tests +++++++++ #
 
-def test_database_fills(db_session):
+def test_database_fills(fill_db, db_session):
     """Check database is filled."""
     assert len(db_session.query(SubReddit).all()) == 50
 
@@ -174,3 +182,32 @@ def test_add_to_db_increase_size(db_session):
 
 
 # ++++++++ Functional Tests +++++++++ #
+
+def test_home_view_returns_200(testapp, db_session, fill_db):
+    """Test that the home view returns 200 OK response."""
+    response = testapp.get('/')
+    assert response.status_code == 200
+
+
+def test_home_view_returns_some_html(testapp, db_session, fill_db):
+    """Home view returns html."""
+    response = testapp.get('/')
+    assert '5 Most Positive' in response.html.text
+
+
+def test_about_view_returns_200(testapp, db_session, fill_db):
+    """Test that the about view returns 200 OK response."""
+    response = testapp.get('/about')
+    assert response.status_code == 200
+
+
+def test_about_view_returns_some_html(testapp, db_session, fill_db):
+    """About view returns html."""
+    response = testapp.get('/about')
+    assert 'About Us' in response.html.text
+
+
+def test_access_control_header_added_to_request(testapp, db_session, fill_db):
+    """Check for access control header."""
+    response = testapp.post('/inbound', params=SAMPLE_POST)
+    assert 'Access-Control-Allow-Origin' in response.headers
