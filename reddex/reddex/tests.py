@@ -27,18 +27,29 @@ def dummy_request(db_session):
     return dummy_request
 
 
-@pytest.fixture(scope='session')
+@pytest.fixture
 def db_session(configuration, request):
     """Create a session for interacting with the test database."""
     SessionFactory = configuration.registry["dbsession_factory"]
     session = SessionFactory()
     engine = session.bind
-    Base.metadata.drop_all(engine)
+    # Base.metadata.drop_all(engine)
     Base.metadata.create_all(engine)
 
-    session_factory = get_session_factory(engine)
+    def teardown():
+        session.transaction.rollback()
+        Base.metadata.drop_all(engine)
 
+    request.addfinalizer(teardown)
+    return session
+
+
+@pytest.fixture
+def add_models(testapp):
+    """Fill database."""
+    SessionFactory = testapp.app.registry["dbsession_factory"]
     with transaction.manager:
+        dbsession = get_tm_session(SessionFactory, transaction.manager)
         import random
         test_subs = ['test1', 'test2', 'test3', 'test4', 'test5',
                      'test6', 'test7', 'test8', 'test9', 'test10']
@@ -53,14 +64,9 @@ def db_session(configuration, request):
                 )
                 holder.append(new_entry)
 
-        session.add_all(holder)
+        dbsession.add_all(holder)
 
-    def teardown():
-        session.transaction.rollback()
-        Base.metadata.drop_all(engine)
-
-    request.addfinalizer(teardown)
-    return session
+    return dbsession
 
 
 @pytest.fixture(scope="session")
@@ -111,7 +117,7 @@ def testapp(request):
 
 # ++++++++ Unit Tests +++++++++ #
 
-def test_database_fills(db_session):
+def test_database_fills(add_models, db_session):
     """Check database is filled."""
     assert len(db_session.query(SubReddit).all()) == 50
 

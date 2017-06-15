@@ -14,6 +14,7 @@ def home_view(request):
     distinct_subs = session.query(SubReddit.name).distinct()
     distinct_subs = [sub[0] for sub in distinct_subs]
     averages_dict = {}
+    neutral5 = positive5 = negative5 = None
     for sub in distinct_subs:
         sub_medians = session.query(
             SubReddit.median
