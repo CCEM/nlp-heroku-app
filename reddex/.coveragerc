@@ -1,3 +1,10 @@
 [run]
 source = reddex
-omit = reddex/test*
+omit =
+    reddex/test*
+    reddex/scripts/__init__.py
+    reddex/scripts/initializedb.py
+    reddex/__init__.py
+
+[report]
+show_missing = True
