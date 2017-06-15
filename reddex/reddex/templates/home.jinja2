@@ -3,24 +3,51 @@
 <h1>Subreddits we've evaluated:</h1>
 
 <h1>5 Most Positive</h1>
-<ul>
+<table>
+  <thead>
+    <td>Subreddit</td>
+    <td>Views</td>
+    <td>Average Score</td>
+  </thead>
   {% for sub in positive %}
-  <li>{{ sub[0] }}: {{ sub[1] }}</li>
+  <tr>
+    <td>{{ sub[0] }}:</td>
+    <td>{{ views[sub[0]] }}</td>
+    <td>{{ sub[1] }}</td>
+  </tr>
   {% endfor %}
-</ul>
+</table>
 
 <h1>5 Least Positive</h1>
-<ul>
+<table>
+  <thead>
+    <td>Subreddit</td>
+    <td>Views</td>
+    <td>Average Score</td>
+  </thead>
   {% for sub in negative %}
-  <li>{{ sub[0] }}: {{ sub[1] }}</li>
+  <tr>
+    <td>{{ sub[0] }}:</td>
+    <td>{{ views[sub[0]] }}</td>
+    <td>{{ sub[1] }}</td>
+  </tr>
   {% endfor %}
-</ul>
+</table>
 
 <h1>5 Most Neutral</h1>
-<ul>
-  {% for sub in neutral%}
-  <li>{{ sub[0] }}: {{ sub[1] }}</li>
+<table>
+  <thead>
+    <td>Subreddit</td>
+    <td>Views</td>
+    <td>Average Score</td>
+  </thead>
+  {% for sub in neutral %}
+  <tr>
+    <td>{{ sub[0] }}:</td>
+    <td>{{ views[sub[0]] }}</td>
+    <td>{{ sub[1] }}</td>
+  </tr>
   {% endfor %}
-</ul>
+</table>
 
 {% endblock content %}
