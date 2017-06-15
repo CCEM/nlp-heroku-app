@@ -181,6 +181,11 @@ def test_add_to_db_increase_size(db_session):
     assert len(db_session.query(SubReddit).all()) == db_len + 1
 
 
+def test_notfound_view_returns_dict(dummy_request):
+    """404 works."""
+    from reddex.views.notfound import notfound_view
+    assert notfound_view(dummy_request) == {}
+
 # ++++++++ Functional Tests +++++++++ #
 
 def test_home_view_returns_200(testapp, db_session, fill_db):
