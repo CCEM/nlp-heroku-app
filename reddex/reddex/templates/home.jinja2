@@ -6,14 +6,14 @@
           <img src="{{ request.static_path('reddex:static/images/white5.png') }}" />
           <div id="summary">
             <h1>Reddex</h1>
-            <p>This project identifies and evaluates Reddit comments for tone (positivity, negativity, and objectivity). We do this in two parts: a Chrome browser extension and a web application. Our extension allows the user the option of evaluating each comment when they visit a Reddit comment thread by clicking on the extension icon.</p>          
+            <p>This project identifies and evaluates Reddit comments for tone (positivity, negativity, and objectivity). We do this in two parts: a Chrome browser extension and a web application. Our extension allows the user the option of evaluating each comment when they visit a Reddit comment thread by clicking on the extension icon.</p>
           <div>
         </div>
     </section>
 <div id="main">
   <h1>Subreddits ranked by sentiment analysis</h1>
   <hr>
-  <h2>Five most positive subreddits visited by our users</h2>
+  <h2>Five most <strong>positive</strong> subreddits visited by our users</h2>
   <table>
     <thead>
       <td>Subreddit</td>
@@ -24,12 +24,12 @@
     <tr>
       <td>{{ sub[0] }}:</td>
       <td>{{ views[sub[0]] }}</td>
-      <td>{{ sub[1] }}</td>
+      <td>{{ "{0:0.2f}".format(sub[1]) }}</td>
     </tr>
     {% endfor %}
   </table>
 
-  <h2>Five most negative subreddits visited by our users</h2>
+  <h2>Five most <strong>negative</strong> subreddits visited by our users</h2>
   <table>
     <thead>
       <td>Subreddit</td>
@@ -40,12 +40,12 @@
     <tr>
       <td>{{ sub[0] }}:</td>
       <td>{{ views[sub[0]] }}</td>
-      <td>{{ sub[1] }}</td>
+      <td>{{ "{0:0.2f}".format(sub[1]) }}</td>
     </tr>
     {% endfor %}
   </table>
 
-  <h2>Five most neutral subreddits visited by our users</h2>
+  <h2>Five most <strong>neutral</strong> subreddits visited by our users</h2>
   <table>
     <thead>
       <td>Subreddit</td>
@@ -56,7 +56,7 @@
     <tr>
       <td>{{ sub[0] }}:</td>
       <td>{{ views[sub[0]] }}</td>
-      <td>{{ sub[1] }}</td>
+      <td>{{ "{0:0.2f}".format(sub[1]) }}</td>
     </tr>
     {% endfor %}
   </table>
