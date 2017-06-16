@@ -50,14 +50,14 @@ def about_view(request):
 @view_config(route_name='inbound', renderer='json')
 def inbound_api(request):
     """Accept good POST request and send back data."""
-    request.response = Response()
-    request.response.headerlist = []
-    request.response.headerlist.extend(
-        (
-            ('Access-Control-Allow-Origin', '*'),
-            ('Content-Type', 'application/json')
-        )
-    )
+    # request.response = Response()
+    # request.response.headerlist = []
+    # request.response.headerlist.extend(
+    #     (
+    #         ('Access-Control-Allow-Origin', '*'),
+    #         ('Content-Type', 'application/json')
+    #     )
+    # )
     if request.method == 'POST':
         try:
             response = {}
