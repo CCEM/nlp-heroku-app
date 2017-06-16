@@ -24,7 +24,8 @@ def home_view(request):
         sub_medians = [median[0] for median in sub_medians]
         views_dict[sub] = len(sub_medians)
         averages_dict[sub] = sum(sub_medians) / len(sub_medians)
-        sorted_list_of_tuples = sorted(averages_dict.items(), key=operator.itemgetter(1))[::-1]
+        sorted_list_of_tuples = sorted(averages_dict.items(),
+                                       key=operator.itemgetter(1))[::-1]
         positive5 = sorted_list_of_tuples[0:5]
         negative5 = sorted_list_of_tuples[-5:][::-1]
         neutral_start = int(len(sorted_list_of_tuples) / 2) - 2
@@ -50,14 +51,15 @@ def about_view(request):
 @view_config(route_name='inbound', renderer='json')
 def inbound_api(request):
     """Accept good POST request and send back data."""
-    # request.response = Response()
-    # request.response.headerlist = []
-    # request.response.headerlist.extend(
-    #     (
-    #         ('Access-Control-Allow-Origin', '*'),
-    #         ('Content-Type', 'application/json')
-    #     )
-    # )
+    request.response = Response()
+    request.response.headerlist = []
+    request.response.headerlist.extend(
+        (
+            ('Access-Control-Allow-Origin',
+             'chrome-extension://lcajaahlihccgekhidmjiedlkcdpedpo'),
+            ('Content-Type', 'application/json')
+        )
+    )
     if request.method == 'POST':
         try:
             response = {}
@@ -69,7 +71,8 @@ def inbound_api(request):
             new_entry = SubReddit(
                 name=sub,
                 mean=sum(response.values()) / len(response),
-                median=sorted(list(response.values()))[(int(len(response) / 2))],
+                median=sorted(list(response.values()))
+                [(int(len(response) / 2))],
                 date=datetime.now()
             )
 
