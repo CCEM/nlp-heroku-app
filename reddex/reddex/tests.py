@@ -1,24 +1,28 @@
 """Testing for reddex."""
-from pyramid import testing
-from reddex.views.default import inbound_api
-from pyramid.config import Configurator
 from datetime import datetime
+import os
+from pyramid.config import Configurator
+from pyramid.httpexceptions import HTTPNotFound
+from pyramid import testing
+import pytest
+from reddex.models import get_tm_session
 from reddex.models.meta import Base
 from reddex.models import SubReddit
-from reddex.models import get_tm_session
+from reddex.scripts.sentiment_reddex import evaluate_comments
+from reddex.views.default import inbound_api
 from reddex.views.default import (
     home_view,
     about_view,
 )
 from reddex.views.notfound import notfound_view
-from pyramid.httpexceptions import HTTPNotFound
-from reddex.scripts.sentiment_reddex import evaluate_comments
-import pytest
-import os
 import transaction
 
 
 SAMPLE_POST = {'reddex0': "I hate cake.", 'reddex1': "Dogs are cute."}
+
+
+
+
 
 
 @pytest.fixture
@@ -193,6 +197,32 @@ def test_our_vader_integration():
     assert evaluate_comments("I love cats!") > 0
 
 
+@pytest.mark.parametrize("test_input, expected", [
+    ("Happy Birthday!", 0),
+    ("Love You!", 0),
+    ("Good luck!", 0),
+    ("I very good day.", 0),
+    ("This is a smart tool.", 0),
+    ("Very smart.", 0),
+])
+def test_vader_does_positives(test_input, expected):
+    """Base Vader sentiment positives greater than nutral."""
+    assert evaluate_comments(test_input) >= expected
+
+
+@pytest.mark.parametrize("test_input, expected", [
+    ("Terrible stump!", 0),
+    ("Damn You!", 0),
+    ("Bad luck!", 0),
+    ("How awful.", 0),
+    ("This is not a smart tool?", 0),
+    ("You stink.", 0),
+])
+def test_vader_does_negatives(test_input, expected):
+    """Base Vader sentiment negatives less than nutral."""
+    assert evaluate_comments(test_input) <= expected
+
+
 def test_our_vader_integration_works_with_empty_string():
     """Return neg/pos test score from text."""
     assert evaluate_comments("") == 0
@@ -210,7 +240,7 @@ def test_home_view_returns_200(testapp, db_session, fill_db):
 def test_home_view_returns_some_html(testapp, db_session, fill_db):
     """Home view returns html."""
     response = testapp.get('/')
-    assert 'Five most positive subreddits visited by our users' in response.html.text
+    assert 'Five most positive subreddits' in response.html.text
 
 
 def test_about_view_returns_200(testapp, db_session, fill_db):
@@ -229,3 +259,15 @@ def test_access_control_header_added_to_request(testapp, db_session, fill_db):
     """Check for access control header."""
     response = testapp.post('/inbound', params=SAMPLE_POST)
     assert 'Access-Control-Allow-Origin' in response.headers
+
+
+def test_bad_route_returns_404_page(testapp):
+    """404 works."""
+    response = testapp.get('/not_a_real_url', status=404)
+    assert response.status_code == 404
+
+
+def test_bad_route_404_has_html(testapp):
+    """404 works."""
+    response = testapp.get('/not_a_real_url', status=404)
+    assert '404 Page Not Found' in response.html.text
