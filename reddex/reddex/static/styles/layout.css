@@ -183,11 +183,12 @@ hr {
 #PNF {
     background-color: #cce6ff;
     padding: 120px;
-    min-height: 50vh;
+    min-height: 90vh;
     text-align: center;
 }
 
 #PNF img {
+    height: 40vh
     padding-bottom: 20px;
 }
 
