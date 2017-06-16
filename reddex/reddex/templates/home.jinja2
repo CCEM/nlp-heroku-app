@@ -22,7 +22,7 @@
     </thead>
     {% for sub in positive %}
     <tr>
-      <td>{{ sub[0] }}:</td>
+      <td><a href="https://www.reddit.com/r/{{ sub[0] }}/">{{ sub[0] }}</a></td>
       <td>{{ views[sub[0]] }}</td>
       <td>{{ "{0:0.0f}".format(sub[1] * 100) }}%</td>
     </tr>
@@ -38,7 +38,7 @@
     </thead>
     {% for sub in negative %}
     <tr>
-      <td>{{ sub[0] }}:</td>
+      <td><a href="https://www.reddit.com/r/{{ sub[0] }}/">{{ sub[0] }}</a></td>
       <td>{{ views[sub[0]] }}</td>
       <td>{{ "{0:0.0f}".format(sub[1] * 100) }}%</td>
     </tr>
@@ -54,7 +54,7 @@
     </thead>
     {% for sub in neutral %}
     <tr>
-      <td>{{ sub[0] }}:</td>
+      <td><a href="https://www.reddit.com/r/{{ sub[0] }}/">{{ sub[0] }}</a></td>
       <td>{{ views[sub[0]] }}</td>
       <td>{{ "{0:0.0f}".format(sub[1] * 100) }}%</td>
     </tr>
