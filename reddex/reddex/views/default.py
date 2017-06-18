@@ -54,7 +54,8 @@ def inbound_api(request):
     request.response.headerlist = []
     request.response.headerlist.extend(
         (
-            ('Access-Control-Allow-Origin', '*'),
+            ('Access-Control-Allow-Origin',
+             'chrome-extension://hidbfncgmahpkafojhjcillaacpjlboj'),
             ('Content-Type', 'application/json')
         )
     )

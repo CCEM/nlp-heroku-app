@@ -1,4 +1,4 @@
-# Reddex [![Build Status](https://travis-ci.org/CCEM/nlp-heroku-app.svg?branch=master)](https://travis-ci.org/CCEM/nlp-heroku-app)
+# Reddex [![Build Status](https://travis-ci.org/CCEM/nlp-heroku-app.svg?branch=master)](https://travis-ci.org/CCEM/nlp-heroku-app) [![Coverage Status](https://coveralls.io/repos/github/CCEM/nlp-heroku-app/badge.svg?branch=master)](https://coveralls.io/github/CCEM/nlp-heroku-app?branch=master)
 A Chrome extension for evaluating the tone of Reddit comments.
 
 
@@ -63,3 +63,12 @@ Distributed under the MIT license. See ``LICENSE`` for more information.
 3. Commit your changes (`git commit -am 'Add some fooBar'`)
 4. Push to the branch (`git push origin feature/fooBar`)
 5. Create a new Pull Request
+
+## Attribution
+
+Big thank you to the VADER team:
+nltk.sentiment.vader
+
+Hutto, C.J. & Gilbert, E.E. (2014). VADER: A Parsimonious Rule-based Model for
+Sentiment Analysis of Social Media Text. Eighth International Conference on
+Weblogs and Social Media (ICWSM-14). Ann Arbor, MI, June 2014.
