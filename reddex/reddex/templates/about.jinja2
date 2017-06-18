@@ -1,0 +1,49 @@
+{% extends "layout.jinja2" %}
+
+{% block content %}
+<div id="spacer"></div>
+<div id="main">
+  <h1>About the Reddex team</h1>
+  <hr>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/carlos.jpeg')}}" /></div>
+        <div class="bio-text">
+            <h2>Carlos Cadena</h2>
+            <p>Before Code Fellows I worked at the University of Washington Medical Center until I decided to reinvent myself. I backpacked around Europe, did some soul searching, and thought a lot about what I wanted to do. Software development seemed like it might provide me the freedom I craved and the ability to make a positive impact in people's lives. I would love to contribute in any way I can to making the world a little more balanced and building software is the way I hope to do that.</p>
+            <p><a href="https://github.com/carloscadena" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/chris.jpeg')}}" /></div>
+        <div class="bio-text">
+            <h2>Chris Hudson</h2>
+            <p>Python software developer who thrives in debugging and problem solving, with providing solutions and advancements  for  gaming, connectivity, communication. Experience in both leadership and team based environments within event and performance based production. I excel in dynamic environments that challenge the status quo.</p>
+            <p><a href="https://github.com/CaHudson94" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/morgan.png')}}" /></div>
+        <div class="bio-text">
+            <h2>Morgan Nomura</h2>
+            <p>I am a Seattle native coding in Python and JavaScript. I have a background in user-centered design, experience in internal tools, e-learning and physical computing, and I love the process of building software. On the analog side of things, I can sew a pair of jeans from scratch without looking at the instructions.</p>
+            <p><a href="https://github.com/morganelle" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/ely.jpeg')}}" /></div>
+        <div class="bio-text">
+            <h2>Ely Paysinger</h2>
+            <p>My name is Ely. I believe that, technology is rapidly changing the world in positive ways and will be what unites us as a people. With a background in the Air force doing electronics repair and more recently as a Nurse in the emergency department I'm always excited to use new skills to solve old or new problems. That's why I'm taking the leap into software development. </p>
+            <p><a href="https://github.com/W-Ely" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> GitHub</a></p>
+        </div>
+    </section>
+    <section class="bio">
+        <div class="bio-image"><img src="{{request.static_url('reddex:static/images/red128.png')}}" /></div>
+        <div class="bio-text">
+            <h2>Our repos</h2>
+            <p><a href="https://github.com/CCEM/nlp-chrome-extension" target="_blank"><i class="fa fa-github-square" aria-hidden="true"></i> Extension</a></p>
+            <p><a href="https://github.com/CCEM/nlp-heroku-app" aria-hidden="true"><i class="fa fa-github-square" aria-hidden="true"></i> Web application</a></p>
+        </div>
+    </section>
+</div>
+{% endblock content %}

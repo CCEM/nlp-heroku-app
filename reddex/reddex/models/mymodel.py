@@ -1,0 +1,25 @@
+"""Define subreddit model."""
+from sqlalchemy import (
+    Column,
+    Index,
+    Text,
+    Float,
+    DateTime,
+    Integer
+)
+
+from .meta import Base
+
+
+class SubReddit(Base):
+    """Define subreddit model."""
+
+    __tablename__ = 'SubReddit'
+    id = Column(Integer, primary_key=True)
+    name = Column(Text)
+    mean = Column(Float)
+    median = Column(Float)
+    date = Column(DateTime)
+
+
+Index('id', SubReddit.id, unique=True, mysql_length=255)
